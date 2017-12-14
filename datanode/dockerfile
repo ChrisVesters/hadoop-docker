@@ -1,0 +1,8 @@
+ARG HADOOP_VERSION=2.9.0
+FROM hadoop:${HADOOP_VERSION}
+
+COPY *.xml ${HADOOP_PATH}/etc/hadoop/
+
+
+EXPOSE 50010 50020 50075 50475
+CMD $HADOOP_PATH/bin/hdfs datanode

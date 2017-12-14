@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  namenode:
+    build: ./namenode
+    ports:
+      - "9000:9000"
+      - "50070:50070"
+    hostname: hdfs-namenode
+
+  datanode:
+    build: ./datanode
+    ports:
+      - "50075"
+    depends_on:
+      - namenode 
+    links:
+      - namenode:hdfs-namenode
+
