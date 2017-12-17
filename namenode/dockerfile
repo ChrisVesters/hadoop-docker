@@ -1,9 +1,11 @@
 ARG HADOOP_VERSION=2.9.0
 FROM hadoop:${HADOOP_VERSION}
 
-COPY *.xml ${HADOOP_PATH}/etc/hadoop/
-RUN ${HADOOP_PATH}/bin/hdfs namenode -format
+COPY *.xml ${HADOOP_CONF_DIR}
+COPY log4j.properties ${HADOOP_CONF_DIR}
+
+RUN ${HADOOP_PREFIX}/bin/hdfs namenode -format
 
 
 EXPOSE 9000 50470 50070
-CMD $HADOOP_PATH/bin/hdfs namenode
+CMD $HADOOP_PREFIX/bin/hdfs --config $HADOOP_CONF_DIR namenode

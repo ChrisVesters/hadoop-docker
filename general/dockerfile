@@ -5,13 +5,17 @@ ARG HADOOP_VERSION=2.9.0
 ARG BASE_PATH=/opt
 ARG DATA_PATH=/data/hdfs
 
-ENV HADOOP_PATH=${BASE_PATH}/hadoop-${HADOOP_VERSION}
+ENV HADOOP_PREFIX=${BASE_PATH}/hadoop-${HADOOP_VERSION}
+ENV HADOOP_CONF_DIR=${HADOOP_PREFIX}/conf/
 
-RUN mkdir -p ${HADOOP_PATH} && mkdir -p ${DATA_PATH}
+RUN mkdir -p ${HADOOP_PREFIX} && \
+	mkdir -p ${DATA_PATH}
 
-RUN curl -o ${HADOOP_PATH}.tar.gz http://apache.cu.be/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
-	tar -zxvf ${HADOOP_PATH}.tar.gz -C ${BASE_PATH} && \
-	rm ${HADOOP_PATH}.tar.gz
+RUN curl -o ${HADOOP_PREFIX}.tar.gz http://apache.cu.be/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
+	tar -zxvf ${HADOOP_PREFIX}.tar.gz -C ${BASE_PATH} && \
+	rm ${HADOOP_PREFIX}.tar.gz
 
 # TODO: remove the parts we don't need!!!
-RUN rm ${HADOOP_PATH}/etc/hadoop/*
+RUN rm -rf ${HADOOP_PREFIX}/etc
+
+ENV HADOOP_ROOT_LOGGER="INFO,RFA"
