@@ -11,9 +11,10 @@ services:
   datanode:
     build: ./datanode
     ports:
-      - "50075"
+      - "50075:50075"
+      - "50010:50010"
+    hostname: localhost
     depends_on:
       - namenode 
     links:
       - namenode:hdfs-namenode
-
