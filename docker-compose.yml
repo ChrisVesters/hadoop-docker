@@ -6,7 +6,14 @@ services:
     ports:
       - "9000:9000"
       - "50070:50070"
-    hostname: hdfs-namenode
+    hostname: namenode
+
+  resourcemanager:
+    build: ./resourcemanager
+    ports:
+      - "8088:8088"
+      - "8031:8031"
+    hostname: resourcemanager
 
   datanode:
     build: ./datanode
@@ -15,6 +22,13 @@ services:
       - "50010:50010"
     hostname: localhost
     depends_on:
-      - namenode 
+      - namenode
     links:
-      - namenode:hdfs-namenode
+      - namenode
+
+  nodemanager:
+    build: ./nodemanager
+    ports: 
+      - "8042:8042"
+    depends_on:
+      - resourcemanager

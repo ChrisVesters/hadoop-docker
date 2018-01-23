@@ -18,4 +18,6 @@ RUN curl -o ${HADOOP_PREFIX}.tar.gz http://apache.cu.be/hadoop/common/hadoop-${H
 # TODO: remove the parts we don't need!!!
 RUN rm -rf ${HADOOP_PREFIX}/etc
 
+RUN mkdir -p ${HADOOP_PREFIX}/logs
+
 ENV HADOOP_ROOT_LOGGER="INFO,RFA"

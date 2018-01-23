@@ -3,11 +3,7 @@
 
 <configuration>
 	<property>
-		<name>fs.defaultFS</name>
-		<value>hdfs://namenode:9000</value>
-	</property>
-	<property>
-		<name>hadoop.http.staticuser.user</name>
-		<value>root</value>
+		<name>dfs.datanode.data.dir</name>
+		<value>file:///data/hdfs</value>
 	</property>
 </configuration>

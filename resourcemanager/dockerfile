@@ -1,0 +1,8 @@
+ARG HADOOP_VERSION=2.9.0
+FROM hadoop:${HADOOP_VERSION}
+
+COPY *.xml ${HADOOP_CONF_DIR}
+COPY log4j.properties ${HADOOP_CONF_DIR}
+
+EXPOSE 8088 8031
+CMD $HADOOP_PREFIX/bin/yarn --config $HADOOP_CONF_DIR resourcemanager
